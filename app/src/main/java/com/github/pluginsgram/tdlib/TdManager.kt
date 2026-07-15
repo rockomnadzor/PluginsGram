@@ -64,4 +64,20 @@ class TdManager(
             put("code", code)
         })
     }
+
+    /** Запрашивает у TDLib список чатов (главный список, до 100 штук). */
+    fun loadChats(limit: Int = 100) {
+        send(JSONObject().apply {
+            put("@type", "loadChats")
+            put("chat_list", JSONObject().apply { put("@type", "chatListMain") })
+            put("limit", limit)
+        })
+    }
+
+    fun getChat(chatId: Long) {
+        send(JSONObject().apply {
+            put("@type", "getChat")
+            put("chat_id", chatId)
+        })
+    }
 }
